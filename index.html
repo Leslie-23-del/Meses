@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Valentine</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Press Start 2P', cursive;
+    background: url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee') no-repeat center center/cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    overflow: hidden;
+}
+
+.overlay {
+    background: rgba(0,0,0,0.6);
+    padding: 40px;
+    border-radius: 20px;
+    backdrop-filter: blur(4px);
+}
+
+h1 {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+button {
+    font-family: 'Press Start 2P', cursive;
+    background: #ff6fa5;
+    border: none;
+    padding: 15px 25px;
+    color: white;
+    cursor: pointer;
+    border-radius: 12px;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.1);
+    background: #ff3f8e;
+}
+
+.window {
+    position: absolute;
+    top: 10%;
+    width: 400px;
+    background: #fff;
+    color: #333;
+    padding: 20px;
+    border-radius: 15px;
+    display: none;
+    animation: fadeIn 1s ease;
+}
+
+.window h2 {
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(-20px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+.heart {
+    position: absolute;
+    color: pink;
+    animation: float 5s infinite;
+}
+
+@keyframes float {
+    0% {transform: translateY(0);}
+    50% {transform: translateY(-20px);}
+    100% {transform: translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="overlay">
+    <h1>FOR MY VALENTINE, ALWAYS 💗</h1>
+    <p>Open gently. It's meant for you.</p>
+    <br>
+    <button onclick="openWindow()">PLAY TOGETHER</button>
+</div>
+
+<div class="window" id="loveWindow">
+    <h2>This is for you</h2>
+    <p>
+    For the person I choose in every version of the day. <br><br>
+    Near or far, <br><br>
+    you are where my heart goes first.
+    </p>
+</div>
+
+<script>
+function openWindow() {
+    document.getElementById("loveWindow").style.display = "block";
+}
+
+// corazones flotando
+setInterval(() => {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "💗";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.top = Math.random() * window.innerHeight + "px";
+    heart.style.fontSize = Math.random() * 20 + 10 + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 5000);
+}, 800);
+</script>
+
+</body>
+</html>
