@@ -4,123 +4,163 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For My Valentine</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
 <style>
 body {
     margin: 0;
     font-family: 'Press Start 2P', cursive;
-    background: url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee') no-repeat center center/cover;
+    background: linear-gradient(to top, #1b1b3a, #5f2c82, #49a09d);
     height: 100vh;
+    overflow: hidden;
+    color: white;
+}
+
+/* Pantalla inicial */
+.main-screen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    flex-direction: column;
     text-align: center;
-    overflow: hidden;
-}
-
-.overlay {
-    background: rgba(0,0,0,0.6);
-    padding: 40px;
-    border-radius: 20px;
-    backdrop-filter: blur(4px);
-}
-
-h1 {
-    font-size: 18px;
-    margin-bottom: 20px;
 }
 
 button {
-    font-family: 'Press Start 2P', cursive;
+    font-family: 'Press Start 2P';
     background: #ff6fa5;
     border: none;
     padding: 15px 25px;
     color: white;
+    border-radius: 10px;
     cursor: pointer;
-    border-radius: 12px;
+    margin-top: 20px;
     transition: 0.3s;
 }
 
 button:hover {
-    transform: scale(1.1);
     background: #ff3f8e;
+    transform: scale(1.1);
 }
 
-.window {
-    position: absolute;
-    top: 10%;
-    width: 400px;
-    background: #fff;
-    color: #333;
-    padding: 20px;
-    border-radius: 15px;
+/* Segunda pantalla */
+.desktop {
     display: none;
-    animation: fadeIn 1s ease;
+    width: 100%;
+    height: 100%;
+    padding: 40px;
+    box-sizing: border-box;
 }
 
-.window h2 {
-    font-size: 14px;
-    margin-bottom: 15px;
+/* Ventana estilo retro */
+.window {
+    width: 400px;
+    background: #f4e9ff;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    overflow: hidden;
+    color: #4b2c5e;
 }
 
-@keyframes fadeIn {
-    from {opacity: 0; transform: translateY(-20px);}
-    to {opacity: 1; transform: translateY(0);}
+.title-bar {
+    background: #d6b3ff;
+    padding: 10px;
+    font-size: 10px;
+    display: flex;
+    justify-content: space-between;
 }
 
-.heart {
+.content {
+    padding: 20px;
+    font-size: 10px;
+    line-height: 1.8;
+}
+
+/* Carpetas */
+.folders {
     position: absolute;
-    color: pink;
-    animation: float 5s infinite;
+    right: 50px;
+    top: 120px;
+    text-align: center;
+    font-size: 10px;
 }
 
-@keyframes float {
-    0% {transform: translateY(0);}
-    50% {transform: translateY(-20px);}
-    100% {transform: translateY(0);}
+.folder {
+    margin: 20px;
+    cursor: pointer;
+}
+
+.folder-icon {
+    font-size: 40px;
+}
+
+.footer-text {
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
+    font-size: 10px;
+    opacity: 0.7;
 }
 </style>
 </head>
 
 <body>
 
-<div class="overlay">
-    <h1>FOR MY VALENTINE, ALWAYS 💗</h1>
+<!-- Pantalla 1 -->
+<div class="main-screen" id="mainScreen">
+    <h2>FOR MY VALENTINE, ALWAYS 💗</h2>
     <p>Open gently. It's meant for you.</p>
-    <br>
-    <button onclick="openWindow()">PLAY TOGETHER</button>
+    <button onclick="openDesktop()">PLAY TOGETHER</button>
 </div>
 
-<div class="window" id="loveWindow">
-    <h2>This is for you</h2>
-    <p>
-    For the person I choose in every version of the day. <br><br>
-    Near or far, <br><br>
-    you are where my heart goes first.
-    </p>
+<!-- Pantalla 2 -->
+<div class="desktop" id="desktop">
+
+    <div class="window">
+        <div class="title-bar">
+            <span>LoveLetter.exe</span>
+            <span>— □ ✕</span>
+        </div>
+        <div class="content">
+            This is for you.<br><br>
+            For the person I choose<br>
+            in every version of the day.<br><br>
+            Near or far,<br><br>
+            you are where my heart goes first.
+        </div>
+    </div>
+
+    <div class="folders">
+        <div class="folder">
+            <div class="folder-icon">📁</div>
+            Surprise1
+        </div>
+
+        <div class="folder">
+            <div class="folder-icon">📁</div>
+            Surprise2
+        </div>
+
+        <div class="folder">
+            <div class="folder-icon">📁</div>
+            Surprise3
+        </div>
+    </div>
+
+    <div class="footer-text">
+        Love unfolds one click at a time
+    </div>
+
 </div>
 
 <script>
-function openWindow() {
-    document.getElementById("loveWindow").style.display = "block";
+function openDesktop() {
+    document.getElementById("mainScreen").style.display = "none";
+    document.getElementById("desktop").style.display = "block";
 }
-
-// corazones flotando
-setInterval(() => {
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML = "💗";
-    heart.style.left = Math.random() * window.innerWidth + "px";
-    heart.style.top = Math.random() * window.innerHeight + "px";
-    heart.style.fontSize = Math.random() * 20 + 10 + "px";
-    document.body.appendChild(heart);
-
-    setTimeout(() => {
-        heart.remove();
-    }, 5000);
-}, 800);
 </script>
 
 </body>
